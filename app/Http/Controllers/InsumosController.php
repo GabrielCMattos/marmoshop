@@ -20,7 +20,17 @@ class InsumosController extends Controller
 
     public function store(Request $request)
     {
-        Insumo::create($request->all());
+        $imageRoute = $request->file("image")->store("images","public");
+        Insumo::create([
+            "category_id"=>$request->category_id,
+            "unit_id"=>$request->unit_id,
+            "brand_id"=>$request->brand_id,
+            "name"=>$request->name,
+            "description"=>$request->description,
+            "price"=>$request->stock,
+            "status"=>$request->status,
+            "image"=>$imageRoute,
+        ]);
         return redirect('insumos')->with('success', 'Insumo created successfully.');
     }
 
