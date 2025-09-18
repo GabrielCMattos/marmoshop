@@ -1,6 +1,5 @@
-<form action="{{ url('products') }}" method="POST">
+<form action="{{ url('brands') }}" method="POST">
     @csrf
     <input type="text" name="name" placeholder="Name" required>
-    <textarea name="description" placeholder="Description" required></textarea>
-    <button type="submit">Create Product</button>
+    <button type="submit">Create Brand</button>
 </form>
