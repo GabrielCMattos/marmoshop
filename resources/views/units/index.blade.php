@@ -1,8 +1,9 @@
-@foreach($categories as $category)
+@foreach($units as $unit)
     <div>
-        <h3>{{ $category->name }}</h3>
-        <a href="{{ url('categories/'.$category->id.'/edit') }}">Edit</a>
-        <form action="{{ url('categories/'.$category->id) }}" method="POST">
+        <h3>{{ $unit->name }}</h3>
+        <p>{{ $unit->sigla }}</p>
+        <a href="{{ url('units/'.$unit->id.'/edit') }}">Edit</a>
+        <form action="{{ url('units/'.$unit->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit">Delete</button>
