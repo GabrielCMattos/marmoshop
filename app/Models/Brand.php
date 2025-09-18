@@ -12,4 +12,8 @@ class Brand extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function insumo(){
+        return $this->hasMany(Insumo::class);
+    }
 }

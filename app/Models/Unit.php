@@ -13,4 +13,9 @@ class Unit extends Model
         'name',
         'sigla'
     ];
+
+    public function insumo()
+    {
+        return $this->hasMany(Insumo::class);
+    }
 }
