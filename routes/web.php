@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\InsumosController;
 use App\Http\Controllers\UnitsController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,14 @@ Route::middleware('auth')->group(function () {
     Route::get('units/{id}/edit', [UnitsController::class, 'edit']);
     Route::put('units/{id}', [UnitsController::class, 'update']);
     Route::delete('units/{id}', [UnitsController::class, 'destroy']);
+
+    //Rotas de Insumos
+    Route::get('insumos', [InsumosController::class, 'index']);
+    Route::get('insumos/create', [InsumosController::class, 'create']);
+    Route::post('insumos', [InsumosController::class, 'store']);
+    Route::get('insumos/{id}/edit', [InsumosController::class, 'edit']);
+    Route::put('insumos/{id}', [InsumosController::class, 'update']);
+    Route::delete('insumos/{id}', [InsumosController::class, 'destroy']);
 });
 
 
