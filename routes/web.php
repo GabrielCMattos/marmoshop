@@ -14,6 +14,9 @@ Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
 Route::middleware('auth')->group(function () {
 
+    //Rota para selecionar a categoria que deseja cadastrar
+    Route::view('/cadastro', 'admin.cadastro')->name('cadastro');
+
     // Rotas de Categorias
     Route::get('categories', [CategoriesController::class, 'index']);
     Route::get('categories/create', [CategoriesController::class, 'create']);

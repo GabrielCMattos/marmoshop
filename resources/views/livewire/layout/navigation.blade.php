@@ -45,8 +45,8 @@ new class extends Component
                         </button>
                     </x-slot>
 
-                    <x-slot name="content" >
-                        <x-dropdown-link  :href="route('profile')" wire:navigate>
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('profile')" wire:navigate>
                             {{ __('Perfil') }}
                         </x-dropdown-link>
 
@@ -56,6 +56,11 @@ new class extends Component
                                 {{ __('Deslogar') }}
                             </x-dropdown-link>
                         </button>
+                        @if(auth()->user()->role == "admin")
+                        <x-dropdown-link :href="route('cadastro')" wire:navigate>
+                            {{ __('Sua Loja (Admin)') }}
+                        </x-dropdown-link>
+                        @endif
                     </x-slot>
                 </x-dropdown>
                 @else
