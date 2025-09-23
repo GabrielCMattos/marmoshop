@@ -30,10 +30,12 @@
                 </div>
                 </a>
 
+                <a href="{{ route('createcategory') }}" wire:navigate>
                 <div class="w-32 h-32 flex flex-col items-center justify-center border rounded-lg shadow bg-white hover:shadow-lg cursor-pointer">
-                    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="w-10 h-10 mb-2">
+                    <img src={{ asset('categorias.png') }} class="w-24 h-24" />
                     <span class="font-semibold">Categorias</span>
                 </div>
+                </a>
             </div>
         </div>
     </div>
