@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Insumo;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,9 @@ class InsumosController extends Controller
 
     public function create()
     {
-        return view('insumos.create');
+        $categorias = Category::all();
+        $marcas = Brand::all();
+        return view('insumos.create', compact('categorias', 'marcas'));
     }
 
     public function store(Request $request)
