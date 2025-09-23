@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
 
     // Rotas de Categorias
     Route::get('categories', [CategoriesController::class, 'index']);
-    Route::get('categories/create', [CategoriesController::class, 'create']);
+    Route::get('categories/create', [CategoriesController::class, 'create'])->name('createcategory');
     Route::post('categories', [CategoriesController::class, 'store']);
     Route::get('categories/{id}/edit', [CategoriesController::class, 'edit']);
     Route::put('categories/{id}', [CategoriesController::class, 'update']);
@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
 
     // Rotas de Brands
     Route::get('brands', [BrandsController::class, 'index']);
-    Route::get('brands/create', [BrandsController::class, 'create']);
+    Route::get('brands/create', [BrandsController::class, 'create'])->name('createbrand');
     Route::post('brands', [BrandsController::class, 'store']);
     Route::get('brands/{id}/edit', [BrandsController::class, 'edit']);
     Route::put('brands/{id}', [BrandsController::class, 'update']);
@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
 
     //Rotas de Insumos
     Route::get('insumos', [InsumosController::class, 'index']);
-    Route::get('insumos/create', [InsumosController::class, 'create']);
+    Route::get('insumos/create', [InsumosController::class, 'create'])->name('createinsumo');
     Route::post('insumos', [InsumosController::class, 'store']);
     Route::get('insumos/{id}/edit', [InsumosController::class, 'edit']);
     Route::put('insumos/{id}', [InsumosController::class, 'update']);
