@@ -1,20 +1,104 @@
 <x-app-layout>
-    <div class="w-full flex items-center justify-center pt-2">
-        <form class="justify-start bg-white shadow-md rounded px-12 pt-6 pb-8 mb-2" action="{{ url('insumos') }}" method="POST" enctype="multipart/form-data">
-            <img src={{ asset('marmoshoplogo.png') }} alt="" class="w-48 h-40 text-gray-500">
-            @csrf
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="Pokémon Name">
-                Nome do Produto
-            </label>
-            <input type="text">
+    <div class="h-full w-full overflow-hidden flex flex-col items-center justify-center bg-gradient-to-b from-yellow-200 to-gray-100">
+        <!-- Título -->
+        <div class="text-center mt-4 m-2">
+            <h1 class="text-2xl font-bold">Cadastrar novo insumo</h1>
+            <p class="text-gray-600">Preencha as informações abaixo</p>
+        </div>
 
+        <!-- Formulário -->
+        <form action="{{ route('insumos.store') }}" method="POST" enctype="multipart/form-data" 
+              class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 mb-6 rounded-xl shadow-lg w-[600px]">
+            @csrf
+
+            <!-- Nome -->
+            <div>
+                <label class="block font-semibold mb-1">Nome</label>
+                <input type="text" name="name" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300" required>
+            </div>
+
+            <!-- Categoria -->
+            <div>
+                <label class="block font-semibold mb-1">Categoria</label>
+                <select name="category_id" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300">
+                    <option value="">Selecione</option>
+                    <!-- opções mock -->
+                    <option value="1">Construção</option>
+                    <option value="2">Ferramentas</option>
+                </select>
+            </div>
+
+            <!-- Unidade -->
+            <div>
+                <label class="block font-semibold mb-1">Unidade</label>
+                <select name="unit_id" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300">
+                    <option value="">Selecione</option>
+                    <option value="1">Kg</option>
+                    <option value="2">Unidade</option>
+                </select>
+            </div>
+
+            <!-- Marca -->
+            <div>
+                <label class="block font-semibold mb-1">Marca</label>
+                <select name="brand_id" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300">
+                    <option value="">Selecione</option>
+                    <option value="1">Tigre</option>
+                    <option value="2">Votomassa</option>
+                </select>
+            </div>
+
+            <!-- Estoque -->
+            <div>
+                <label class="block font-semibold mb-1">Estoque</label>
+                <input type="number" name="stock" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300" min="0">
+            </div>
+
+            <!-- Status -->
+            <div>
+                <label class="block font-semibold mb-1">Status</label>
+                <select name="status" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300">
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                </select>
+            </div>
+
+            <!-- Imagem -->
+            <div class="col-span-2 flex flex-col items-center">
+                <label class="block font-semibold mb-2">Imagem</label>
+                <input type="file" name="image" id="imageInput" accept="image/*" 
+                       class="mb-4 border rounded-lg px-3 py-2 w-full text-gray-600">
+
+                <!-- Preview -->
+                <div id="previewContainer" class="w-40 h-40 flex items-center justify-center border rounded-lg shadow bg-gray-50 overflow-hidden">
+                    <span class="text-gray-400">Pré-visualização</span>
+                </div>
+            </div>
+
+            <!-- Botão -->
+            <div class="col-span-2 flex justify-center mt-6">
+                <button type="submit" 
+                        class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow">
+                    Salvar
+                </button>
+            </div>
         </form>
     </div>
 
+    <script>
+        document.getElementById("imageInput").addEventListener("change", function(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById("previewContainer");
 
-
-
-
-
-
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewContainer.innerHTML = `<img src="${e.target.result}" class="object-cover w-full h-full" />`;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.innerHTML = `<span class="text-gray-400">Pré-visualização</span>`;
+            }
+        });
+    </script>
 </x-app-layout>

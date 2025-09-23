@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     //Rotas de Insumos
     Route::get('insumos', [InsumosController::class, 'index']);
     Route::get('insumos/create', [InsumosController::class, 'create'])->name('createinsumo');
-    Route::post('insumos', [InsumosController::class, 'store']);
+    Route::post('insumos', [InsumosController::class, 'store'])->name('insumos.store');
     Route::get('insumos/{id}/edit', [InsumosController::class, 'edit']);
     Route::put('insumos/{id}', [InsumosController::class, 'update']);
     Route::delete('insumos/{id}', [InsumosController::class, 'destroy']);
