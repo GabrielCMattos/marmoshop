@@ -33,9 +33,11 @@
             <div>
                 <label class="block font-semibold mb-1">Unidade</label>
                 <select name="unit_id" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300">
-                    <option value="">Selecione</option>
-                    <option value="1">Kg</option>
-                    <option value="2">Unidade</option>
+                    @forelse ($unidades as $unit)
+                    <option value="{{$unit->id}}">{{$unit->sigla}}</option>
+                    @empty
+                    <option disabled>Nenhuma unidade cadastrada</option>
+                    @endforelse
                 </select>
             </div>
 
@@ -46,7 +48,7 @@
                     @forelse ($marcas as $marca)
                     <option value="{{$marca->id}}">{{$marca->name}}</option>
                     @empty
-                    <option disabled>Nenhuma categoria cadastrada</option>
+                    <option disabled>Nenhuma marca cadastrada</option>
                     @endforelse
                 </select>
             </div>
@@ -57,13 +59,12 @@
                 <input type="number" name="stock" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300" min="0">
             </div>
 
-            <!-- Status -->
+            <!-- Preço -->
             <div>
-                <label class="block font-semibold mb-1">Status</label>
-                <select name="status" class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300">
-                    <option value="ativo">Ativo</option>
-                    <option value="inativo">Inativo</option>
-                </select>
+                <label class="block font-semibold mb-1">Preço</label>
+                <input type="text" name="price" id="priceInput"
+                    class="w-full border rounded-lg px-3 py-2 focus:ring focus:ring-yellow-300"
+                    placeholder="R$ 0,00">
             </div>
 
             <!-- Imagem -->
@@ -102,6 +103,25 @@
             } else {
                 previewContainer.innerHTML = `<span class="text-gray-400">Pré-visualização</span>`;
             }
+        });
+    </script>
+    <script>
+        const priceInput = document.getElementById('priceInput');
+
+        priceInput.addEventListener('input', (e) => {
+            let value = e.target.value;
+
+            // Remove tudo que não é número
+            value = value.replace(/\D/g, '');
+
+            // Transforma em número e divide por 100 para formar centavos
+            value = (Number(value) / 100).toFixed(2);
+
+            // Formata em R$
+            value = value.replace('.', ',');
+
+            // Adiciona o prefixo R$
+            e.target.value = 'R$ ' + value;
         });
     </script>
 </x-app-layout>

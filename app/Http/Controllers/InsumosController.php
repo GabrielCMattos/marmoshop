@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Insumo;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class InsumosController extends Controller
@@ -19,21 +20,27 @@ class InsumosController extends Controller
     {
         $categorias = Category::all();
         $marcas = Brand::all();
-        return view('insumos.create', compact('categorias', 'marcas'));
+        $unidades = Unit::all();
+        return view('insumos.create', compact('categorias', 'marcas', 'unidades'));
     }
 
     public function store(Request $request)
     {
-        $imageRoute = $request->file("image")->store("images","public");
+
+        $price = $request->input('price');
+        $price = str_replace(['R$', ' '], '', $price);
+        $price = str_replace(',', '.', $price);
+
+        $imageRoute = $request->file("image")->store("images", "public");
         Insumo::create([
-            "category_id"=>$request->category_id,
-            "unit_id"=>$request->unit_id,
-            "brand_id"=>$request->brand_id,
-            "name"=>$request->name,
-            "description"=>$request->description,
-            "price"=>$request->stock,
-            "status"=>$request->status,
-            "image"=>$imageRoute,
+            "category_id" => $request->category_id,
+            "unit_id" => $request->unit_id,
+            "brand_id" => $request->brand_id,
+            "name" => $request->name,
+            "description" => $request->description,
+            "price" => $price,
+            "stock" => $request->stock,
+            "image" => $imageRoute,
         ]);
         return redirect('insumos')->with('success', 'Insumo created successfully.');
     }
